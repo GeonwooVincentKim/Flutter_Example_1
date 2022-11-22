@@ -29,10 +29,20 @@ class WidgetAppState extends State<WidgetApp> {
       body: Container(
         child: Center(
           child: Column(
+            // ignore: prefer_const_literals_to_create_immutables
             children: [
-              Text('Flutter'),
-              TextField(),
-              ElevatedButton(onPressed: () {}, child: const Text(''))
+              const Padding(
+                padding: EdgeInsets.all(15),
+                child: Text('Flutter')
+              ),
+              const Padding(
+                padding: EdgeInsets.only(left: 20, right: 20),
+                child: TextField(),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(15),
+                child: ElevatedButton(child: const Text(''), onPressed: () {})  
+              )
             ],
           ),
         )
