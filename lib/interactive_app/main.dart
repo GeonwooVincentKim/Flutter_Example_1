@@ -37,6 +37,13 @@ class WidgetAppState extends State<WidgetApp> {
             children: [
               Padding(
                 padding: const EdgeInsets.all(15),
+                child: Text(
+                  'Result : $sum',
+                  style: const TextStyle(fontSize: 20)
+                )
+              ),
+              Padding(
+                padding: const EdgeInsets.all(15),
                 child: TextField(keyboardType: TextInputType.number, controller: value1)
               ),
               Padding(
