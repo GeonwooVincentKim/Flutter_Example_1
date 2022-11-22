@@ -73,7 +73,7 @@ class WidgetAppState extends State<WidgetApp> {
                     // ignore: prefer_const_literals_to_create_immutables
                     children: [
                       const Icon(Icons.add),
-                      const Text('더하기')
+                      Text(_buttonText!)
                     ],
                   ),
                   style: ButtonStyle(
@@ -81,7 +81,21 @@ class WidgetAppState extends State<WidgetApp> {
                   ),
                   onPressed: () {
                     setState(() {
-                      int result = int.parse(value1.value.text) + int.parse(value2.value.text);
+                      var value1Int = double.parse(value1.value.text);
+                      var value2Int = double.parse(value2.value.text);
+                      // ignore: prefer_typing_uninitialized_variables
+                      var result;
+
+                      if (_buttonText == 'Add') {
+                        result = value1Int + value2Int;
+                      } else if (_buttonText == 'Minus') {
+                        result = value1Int - value2Int;
+                      } else if (_buttonText == 'Multiple') {
+                        result = value1Int * value2Int;
+                      } else {
+                        result = value1Int / value2Int;
+                      }
+                      
                       sum = '$result';
                     });
                   }
