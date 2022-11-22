@@ -26,6 +26,21 @@ class WidgetAppState extends State<WidgetApp> {
   TextEditingController value1 = TextEditingController();
   TextEditingController value2 = TextEditingController();
 
+  List _buttonList = ['Add', 'Minus', 'Multiple', 'Divide'];
+  List<DropdownMenuItem<String>> _dropDownMenuItems = new List.empty(growable: true);
+  String? _buttonText;
+
+  @override
+  void initState() {
+    super.initState();
+
+    for (var item in _buttonList) {
+      _dropDownMenuItems.add(DropdownMenuItem(value: item, child: Text(item)));
+    }
+
+    _buttonText = _dropDownMenuItems[0].value;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -71,6 +86,20 @@ class WidgetAppState extends State<WidgetApp> {
                     });
                   }
                 )  
+              ),
+              Padding(
+                padding: const EdgeInsets.all(15),
+                child: DropdownButton(items: _dropDownMenuItems, onChanged: (String? value) {
+                  // First Case -> the state could be change when it outer of the setState
+                  /* _buttonText = value;
+                  setState(() {
+                  }); */
+
+                  // Second Case -> the state in the setState
+                  setState(() {
+                    _buttonText = value;
+                  });
+                }, value: _buttonText)
               )
             ],
           ),
