@@ -13,6 +13,21 @@ class MyApp extends StatelessWidget {
         '/': (context) => const Home(),
         '/subpage': (context) => const SubPage(),
       },
+      onGenerateRoute: (RouteSettings settings){
+        final List<String> pathElements = settings.name!.split("/");
+        if(pathElements[0] != '') return null;
+        if(pathElements[1] == 'subpage'){
+          String subPageId = pathElements[2];
+
+          // return MaterialPageRoute(
+            // builder: (BuildContext context) => SubPageDetail(subPageId: subPageId),
+          // );
+        }
+        return null;
+      },
+      onUnknownRoute: (RouteSettings settings) {
+        print(settings);
+      },
     );
   }
 }
