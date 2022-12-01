@@ -44,11 +44,16 @@ class HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Container(
       child: Center(
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(8.0),
-          child: Image.asset(
-            'image/flutter_logo.png',
-            fit: BoxFit.fill,
+        child: GestureDetector(
+          onTap:() {
+            Navigator.pushNamed(context, "/subpage");
+          },
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(8.0),
+            child: Image.asset(
+              'image/flutter_logo.png',
+              fit: BoxFit.fill,
+            )
           )
         )
       ),

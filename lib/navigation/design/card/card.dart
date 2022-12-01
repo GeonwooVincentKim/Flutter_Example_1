@@ -6,7 +6,10 @@ class SubPageCard extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         Navigator.pushNamed(context, "/");
-      }
+      },
+      child: Center(
+        child: Text("Hello World")
+      ),
     );
   }
 }
