@@ -64,6 +64,14 @@ flutter:
   assets:
     - image/sample_image.png
     - image/flutter_logo.png
+    - image/chapter_06/bee.png
+    - image/chapter_06/cat.png
+    - image/chapter_06/cow.png
+    - image/chapter_06/dog.png
+    - image/chapter_06/fox.png
+    - image/chapter_06/monkey.png
+    - image/chapter_06/pig.png
+    - image/chapter_06/wolf.png
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 
