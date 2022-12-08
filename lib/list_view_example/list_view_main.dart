@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1_1/list_view_example/model/animalItem.dart';
 import 'package:flutter_application_1_1/list_view_example/provider/animal_provider.dart';
 import 'package:flutter_application_1_1/list_view_example/screen/first_page.dart';
+import 'package:flutter_application_1_1/list_view_example/screen/second_page.dart';
 
 void main() => runApp(MyApp());
 
@@ -13,7 +14,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: "List View Example",
       theme: ThemeData(primarySwatch: Colors.blue),
-      home: Home(key: key)
+      home: Home(key: key),
     );
   }
 }
@@ -40,25 +41,29 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      initialIndex: 1,
-      length: 2,
-      child: Scaffold(
-        appBar: AppBar(title: const Text("List View Example")),
-        body: TabBarView(
-          children: <Widget>[
-            FirstApp(list: animalList),
-            FirstApp(list: animalList),
-          ],
-        ),
-        bottomNavigationBar: TabBar(
-          tabs: <Tab>[
-            Tab(icon: Icon(Icons.looks_one, color: Colors.blue),),
-            Tab(icon: Icon(Icons.looks_two, color: Colors.blue),)
-          ],
-          controller: controller,
-        ),
-      )
-    );
+        initialIndex: 1,
+        length: 2,
+        child: Scaffold(
+          appBar: AppBar(title: const Text("List View Example")),
+          body: TabBarView(
+            children: <Widget>[
+              FirstApp(list: animalList),
+              SecondApp(list: animalList),
+            ],
+            controller: controller,
+          ),
+          bottomNavigationBar: TabBar(
+            tabs: <Tab>[
+              Tab(
+                icon: Icon(Icons.looks_one, color: Colors.blue),
+              ),
+              Tab(
+                icon: Icon(Icons.looks_two, color: Colors.blue),
+              )
+            ],
+            controller: controller,
+          ),
+        ));
   }
 
   @override

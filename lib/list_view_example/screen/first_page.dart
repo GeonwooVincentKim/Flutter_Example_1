@@ -8,34 +8,37 @@ class FirstApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        child: Center(
-          child: ListView.builder(
-            itemBuilder: (context, position) {
-              return GestureDetector(
+        body: Center(
+      child: ListView.builder(
+          itemBuilder: (context, position) {
+            return GestureDetector(
                 child: Card(
-                  child: Row(
-                    children: [
-                      Image.asset(list[position].imagePath, height: 100, width: 100, fit: BoxFit.contain,),
-                      Text(list[position].animalName)
-                    ],
-                  )
-                ),
+                    child: Row(
+                  children: [
+                    Image.asset(
+                      list[position].imagePath,
+                      height: 100,
+                      width: 100,
+                      fit: BoxFit.contain,
+                    ),
+                    Text(list[position].animalName)
+                  ],
+                )),
                 onTap: () {
                   AlertDialog dialog = AlertDialog(
-                    content: Text('This is ${list[position].kind}.', style: const TextStyle(fontSize: 30.0),)
-                  );
-                  showDialog(context: context, builder: (BuildContext context) => dialog);
+                      content: Text(
+                    'This is ${list[position].kind}.',
+                    style: const TextStyle(fontSize: 30.0),
+                  ));
+                  showDialog(
+                      context: context,
+                      builder: (BuildContext context) => dialog);
                 },
                 onLongPress: () {
                   list.removeAt(position);
-                }
-              );
-            },
-            itemCount: list.length
-          ),
-        )
-      )
-    );
+                });
+          },
+          itemCount: list.length),
+    ));
   }
 }
