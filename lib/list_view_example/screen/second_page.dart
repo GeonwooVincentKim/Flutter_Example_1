@@ -28,6 +28,7 @@ class _SecondAppState extends State<SecondApp> {
             keyboardType: TextInputType.text,
             maxLines: 1),
         Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             Radio(value: 0, groupValue: _radioValue, onChanged: _radioChange),
             const Text('Amphibian'),
@@ -36,7 +37,16 @@ class _SecondAppState extends State<SecondApp> {
             Radio(value: 2, groupValue: _radioValue, onChanged: _radioChange),
             const Text('Mammal')
           ],
-        )
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            const Text('Can fly?'),
+            Checkbox(
+                value: flyExist,
+                onChanged: (bool? check) => setState(() => flyExist = check!))
+          ],
+        ),
       ],
     )));
   }
