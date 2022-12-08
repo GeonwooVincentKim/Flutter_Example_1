@@ -51,10 +51,10 @@ class SecondPageState extends State<SecondPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Sub Page Main')),
+      appBar: AppBar(title: Text('Sub Page Second')),
       body: Container(
         child: Center(
-          child: Text('First Page')
+          child: Text('Second Page')
         ),
       ),
       floatingActionButton: FloatingActionButton(
