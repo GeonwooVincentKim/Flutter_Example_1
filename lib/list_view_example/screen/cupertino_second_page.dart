@@ -91,7 +91,7 @@ class _CupertinoSecondPage extends State<CupertinoSecondPage> {
                     GestureDetector(
                       child: Image.asset('image/chapter_06/cow.png', width: 80),
                       onTap: () {
-                        _imagePath = 'repo/images/cow.png';
+                        _imagePath = 'image/chapter_06/cow.png';
                       },
                     ),
                     GestureDetector(

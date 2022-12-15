@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import 'animal.dart';
 
-
 class SecondApp extends StatefulWidget {
   const SecondApp({Key? key}) : super(key: key);
 
@@ -37,22 +36,22 @@ class _SecondAppState extends State<SecondApp> {
                       value: 0,
                       groupValue: _radioValue,
                       onChanged: _radioChange),
-                  Text('양서류'),
+                  Text('Amphibian'),
                   Radio(
                       value: 1,
                       groupValue: _radioValue,
                       onChanged: _radioChange),
-                  Text('파충류'),
+                  Text('Reptile'),
                   Radio(
                       value: 2,
                       groupValue: _radioValue,
                       onChanged: _radioChange),
-                  Text('포유류'),
+                  Text('Mammal'),
                 ],
               ),
               Row(
                 children: [
-                  Text('날 수 있나요?'),
+                  Text('Can fly?'),
                   Checkbox(
                       value: flyExist,
                       onChanged: (bool? check1234) {
@@ -68,66 +67,66 @@ class _SecondAppState extends State<SecondApp> {
                   scrollDirection: Axis.horizontal,
                   children: [
                     GestureDetector(
-                      child: Image.asset('repo/images/cow.png',
+                      child: Image.asset('image/chapter_06/cow.png',
                           height: 50, width: 80),
                       onTap: () {
-                        _imagePath = 'repo/images/cow.png';
+                        _imagePath = 'image/chapter_06/cow.png';
                       },
                     ),
                     GestureDetector(
-                      child: Image.asset('repo/images/pig.png',
+                      child: Image.asset('image/chapter_06/pig.png',
                           height: 50, width: 80),
                       onTap: () {
-                        _imagePath = 'repo/images/pig.png';
+                        _imagePath = 'image/chapter_06/pig.png';
                       },
                     ),
                     GestureDetector(
-                      child: Image.asset('repo/images/bee.png',
+                      child: Image.asset('image/chapter_06/bee.png',
                           height: 50, width: 80),
                       onTap: () {
-                        _imagePath = 'repo/images/bee.png';
+                        _imagePath = 'image/chapter_06/bee.png';
                       },
                     ),
                     GestureDetector(
-                      child: Image.asset('repo/images/cat.png',
+                      child: Image.asset('image/chapter_06/cat.png',
                           height: 50, width: 80),
                       onTap: () {
-                        _imagePath = 'repo/images/cat.png';
+                        _imagePath = 'image/chapter_06/cat.png';
                       },
                     ),
                     GestureDetector(
-                      child: Image.asset('repo/images/dog.png',
+                      child: Image.asset('image/chapter_06/dog.png',
                           height: 50, width: 80),
                       onTap: () {
-                        _imagePath = 'repo/images/dog.png';
+                        _imagePath = 'image/chapter_06/dog.png';
                       },
                     ),
                     GestureDetector(
-                      child: Image.asset('repo/images/fox.png',
+                      child: Image.asset('image/chapter_06/fox.png',
                           height: 50, width: 80),
                       onTap: () {
-                        _imagePath = 'repo/images/fox.png';
+                        _imagePath = 'image/chapter_06/fox.png';
                       },
                     ),
                     GestureDetector(
-                      child: Image.asset('repo/images/monkey.png',
+                      child: Image.asset('image/chapter_06/monkey.png',
                           height: 50, width: 80),
                       onTap: () {
-                        _imagePath = 'repo/images/monkey.png';
+                        _imagePath = 'image/chapter_06/monkey.png';
                       },
                     ),
                     GestureDetector(
-                      child: Image.asset('repo/images/wolf.png',
+                      child: Image.asset('image/chapter_06/wolf.png',
                           height: 50, width: 80),
                       onTap: () {
-                        _imagePath = 'repo/images/wolf.png';
+                        _imagePath = 'image/chapter_06/wolf.png';
                       },
                     ),
                   ],
                 ),
               ),
               ElevatedButton(
-                child: Text('동물추가하기'),
+                child: Text('Add Animal'),
                 onPressed: () {
                   var animal = Animal(
                       animalName: nameController.value.text,
@@ -136,10 +135,12 @@ class _SecondAppState extends State<SecondApp> {
                       flyExist: flyExist);
 
                   AlertDialog dialog = AlertDialog(
-                    title: Text('동물 추가하기'),
+                    title: Text('Add Animal'),
                     content: Text(
-                      '이 동물은 ${animal.animalName} 입니다 또 동물의 종류는 ${animal.kind}입니다.\n 이 동물을 추가하시겠습니까?',
-                    style: TextStyle(fontSize: 30.0),
+                      'This is ${animal.animalName}.' +
+                          'The Kind is ${animal.kind}\n' +
+                          'Do you want to add this animal?',
+                      style: TextStyle(fontSize: 30.0),
                     ),
                     actions: [
                       ElevatedButton(
@@ -147,13 +148,13 @@ class _SecondAppState extends State<SecondApp> {
                           widget.list?.add(animal);
                           Navigator.of(context).pop();
                         },
-                        child: Text('예'),
+                        child: Text('Yes'),
                       ),
                       ElevatedButton(
                         onPressed: () {
                           Navigator.of(context).pop();
                         },
-                        child: Text('아니요'),
+                        child: Text('No'),
                       ),
                     ],
                   );

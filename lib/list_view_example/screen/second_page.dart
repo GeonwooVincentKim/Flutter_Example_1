@@ -138,11 +138,11 @@ class _SecondAppState extends State<SecondApp> {
   getKind(int radioValue) {
     switch (radioValue) {
       case 0:
-        return "양서류";
+        return "Amphibian";
       case 1:
-        return "파충류";
+        return "Reptile";
       case 2:
-        return "포유류";
+        return "Mammal";
     }
   }
 }
