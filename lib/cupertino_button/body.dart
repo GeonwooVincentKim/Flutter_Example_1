@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_application_1_1/cupertino_button/cupertino_chat.dart';
-import 'package:flutter_application_1_1/cupertino_button/cupertino_settings.dart';
+import 'package:flutter_application_1_1/cupertino_button/widget/cupertino_navigation_widget.dart';
 
 class Body extends StatefulWidget {
   const Body({super.key});
@@ -27,29 +26,25 @@ class _BodyState extends State<Body> {
       ),
       tabBuilder: (context, index) {
         late final CupertinoTabView returnValue;
+        List<String> getTitleText = ['Calls', 'Chats', 'Settings'];
 
         switch (index) {
           case 0:
             returnValue = CupertinoTabView(builder: (context) {
-              return const CupertinoPageScaffold(
-                navigationBar: CupertinoNavigationBar(
-                  middle: Text('Calls')
-                ),
-                child: Center(child: Text('Calls'))
-              );
+              return CupertinoNavigationWidget(
+                  middleWidget: Text(getTitleText[0]), 
+                  titleText: getTitleText[0]
+                );
             });
             break;
           
           case 1:
             returnValue = CupertinoTabView(
               builder: (context) {
-                return const CupertinoPageScaffold(
-                  navigationBar: CupertinoNavigationBar(
-                    middle: Text('Chat')
-                  ),
-                  child: Center(child: Text('Chat'))
+                return CupertinoNavigationWidget(
+                  middleWidget: Text(getTitleText[1]), 
+                  titleText: getTitleText[1]
                 );
-                // return CupertinoNavigationPage(middleWidget: Text(""));
               },
             );
             break;
@@ -57,13 +52,10 @@ class _BodyState extends State<Body> {
           case 2:
             returnValue = CupertinoTabView(
               builder: (context) {
-                return const CupertinoPageScaffold(
-                  navigationBar: CupertinoNavigationBar(
-                    middle: Text('Settings')
-                  ),
-                  child: Center(child: Text('Settings'))
+                return CupertinoNavigationWidget(
+                  middleWidget: Text(getTitleText[2]), 
+                  titleText: getTitleText[2]
                 );
-                // return CupertinoNavigationPage(middleWidget: Text(""));
               },
             );
             break;
@@ -74,25 +66,3 @@ class _BodyState extends State<Body> {
     );
   }
 }
-
-// class CupertinoNavigationPage extends StatelessWidget {
-//   // ignore: prefer_typing_uninitialized_variables
-//   final Widget middleWidget;
-
-//   const CupertinoNavigationPage({
-//     super.key,
-//     required this.middleWidget
-//   });
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return const CupertinoPageScaffold(
-//       navigationBar: CupertinoNavigationBar(
-//         // middle: middleWidget
-//         // middle: Text('Calls')
-//         // middle: Widget(key: key, middleWidget),
-//       ),
-//       child: Center(child: Text('Calls'))
-//     );
-//   }
-// }
