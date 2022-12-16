@@ -1,4 +1,6 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_application_1_1/cupertino_button/cupertino_chat.dart';
+import 'package:flutter_application_1_1/cupertino_button/cupertino_settings.dart';
 
 class Body extends StatefulWidget {
   const Body({super.key});
@@ -10,13 +12,53 @@ class Body extends StatefulWidget {
 class _BodyState extends State<Body> {
   @override
   Widget build(BuildContext context) {
-    return const CupertinoPageScaffold(
-      navigationBar: CupertinoNavigationBar(
-        middle: Text('Chat App'),
+    return CupertinoTabScaffold(
+      tabBar: CupertinoTabBar(
+        currentIndex: 1,
+        items: const <BottomNavigationBarItem> [
+          BottomNavigationBarItem(
+            icon: Icon(CupertinoIcons.phone), label: 'Calls'
+          ),          
+          BottomNavigationBarItem(
+            icon: Icon(CupertinoIcons.chat_bubble_2), label: 'Chats'),
+          BottomNavigationBarItem(
+            icon: Icon(CupertinoIcons.settings), label: 'Settings'),
+          ]
       ),
-      child: Center(
-        child: Text('Hi')
-      )
+      tabBuilder: (context, index) {
+        late final CupertinoTabView returnValue;
+
+        switch (index) {
+          case 0:
+            returnValue = CupertinoTabView(builder: (context) {
+              return const CupertinoPageScaffold(
+                navigationBar: CupertinoNavigationBar(
+                  middle: Text('Calls')
+                ),
+                child: Center(child: Text('Calls'))
+              );
+            });
+            break;
+          
+          case 1:
+            returnValue = CupertinoTabView(
+              builder: (context) {
+                return CupertinoChatPage();
+              },
+            );
+            break;
+          
+          case 2:
+            returnValue = CupertinoTabView(
+              builder: (context) {
+                return CupertinoSettingsPage();
+              },
+            );
+            break;
+        }
+
+        return returnValue;
+      },
     );
   }
 }
