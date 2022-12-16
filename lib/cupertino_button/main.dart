@@ -13,6 +13,10 @@ class MyApp extends StatelessWidget {
       theme: CupertinoThemeData(brightness: Brightness.light),
       // home: BodyPageScaffold(),
       home: Body(),
+      initialRoute: "/",
+      routes:  {
+
+      }
     );
   }
 }

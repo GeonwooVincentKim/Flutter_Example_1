@@ -43,7 +43,13 @@ class _BodyState extends State<Body> {
           case 1:
             returnValue = CupertinoTabView(
               builder: (context) {
-                return CupertinoChatPage();
+                return const CupertinoPageScaffold(
+                  navigationBar: CupertinoNavigationBar(
+                    middle: Text('Chat')
+                  ),
+                  child: Center(child: Text('Chat'))
+                );
+                // return CupertinoNavigationPage(middleWidget: Text(""));
               },
             );
             break;
@@ -51,7 +57,13 @@ class _BodyState extends State<Body> {
           case 2:
             returnValue = CupertinoTabView(
               builder: (context) {
-                return CupertinoSettingsPage();
+                return const CupertinoPageScaffold(
+                  navigationBar: CupertinoNavigationBar(
+                    middle: Text('Settings')
+                  ),
+                  child: Center(child: Text('Settings'))
+                );
+                // return CupertinoNavigationPage(middleWidget: Text(""));
               },
             );
             break;
@@ -62,3 +74,25 @@ class _BodyState extends State<Body> {
     );
   }
 }
+
+// class CupertinoNavigationPage extends StatelessWidget {
+//   // ignore: prefer_typing_uninitialized_variables
+//   final Widget middleWidget;
+
+//   const CupertinoNavigationPage({
+//     super.key,
+//     required this.middleWidget
+//   });
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return const CupertinoPageScaffold(
+//       navigationBar: CupertinoNavigationBar(
+//         // middle: middleWidget
+//         // middle: Text('Calls')
+//         // middle: Widget(key: key, middleWidget),
+//       ),
+//       child: Center(child: Text('Calls'))
+//     );
+//   }
+// }
