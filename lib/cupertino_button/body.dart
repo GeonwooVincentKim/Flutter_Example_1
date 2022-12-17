@@ -45,6 +45,18 @@ class _BodyState extends State<Body> {
           slivers: [
             CupertinoSliverNavigationBar(
               largeTitle: Text(textLocation),
+              leading: const Text(
+                'Edit',
+                style: TextStyle(color: CupertinoColors.link),
+              ),
+              middle: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: const [
+                  CupertinoActivityIndicator(),
+                  SizedBox(width: 8),
+                  Text('Waiting for Network')
+                ],
+              )
             )
           ],
         );
