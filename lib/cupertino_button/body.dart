@@ -28,12 +28,9 @@ class _BodyState extends State<Body> {
         List<String> getTitleText = ['Calls', 'Chats', 'Settings'];
 
         switch (index) {
-          case 0:   
-            return printValue(getTitleText[0]);
-          case 1:
-            return printValue(getTitleText[1]);
-          case 2:
-            return printValue(getTitleText[2]);
+          case 0:  return printValue(getTitleText[0]);
+          case 1:  return printValue(getTitleText[1]);
+          case 2:  return printValue(getTitleText[2]);
         }
 
         return printValue(getTitleText[0]);
