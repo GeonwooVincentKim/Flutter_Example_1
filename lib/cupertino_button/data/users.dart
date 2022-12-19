@@ -1,7 +1,8 @@
 import 'package:flutter_application_1_1/cupertino_button/model/users.dart';
 import 'package:flutter_application_1_1/cupertino_button/shared/style.dart';
 
-List<User> users = [
+// ignore: non_constant_identifier_names
+List<User> DUMMY_USERS = [
   User(name: 'Jackname: ', color: greenAccent),
   User(name: 'Lucyname: ', color: green),
   User(name: 'Lunaname: ', color: black26),
