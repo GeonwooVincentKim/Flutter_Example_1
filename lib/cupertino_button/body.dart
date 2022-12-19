@@ -41,10 +41,17 @@ class _BodyState extends State<Body> {
   CupertinoTabView printValue (textLocation) {
     return CupertinoTabView(
       builder: (context) {
-        return CupertinoNavigationWidget(
-          middleWidget: Text(textLocation),
-          titleText: textLocation
+        return CustomScrollView(
+          slivers: [
+            CupertinoSliverNavigationBar(
+              largeTitle: Text(textLocation),
+            )
+          ],
         );
+        // return CupertinoNavigationWidget(
+        //   middleWidget: Text(textLocation),
+        //   titleText: textLocation
+        // );
       },
     );
   }
