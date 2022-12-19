@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_application_1_1/cupertino_button/widget/cupertino_navigation_widget.dart';
+import 'package:flutter_application_1_1/cupertino_button/widgets/cupertino_navigation_widget.dart';
 
 class Body extends StatefulWidget {
   const Body({super.key});
