@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1_1/cupertino_example/design/widget/custom_cupertino_picker.dart';
+import 'package:flutter_application_1_1/cupertino_example/design/widget/custom_text_button.dart';
 
 void main() => runApp(const CupertinoDesignPage());
 
@@ -39,29 +41,9 @@ class _CupertinoDesignPageState extends State<CupertinoDesignPage> {
                           child: Column(
                             children: [
                               Expanded(
-                                child: CupertinoPicker(
-                                  itemExtent: 50,
-                                  backgroundColor: Colors.white,
-                                  scrollController: firstController,
-                                  onSelectedItemChanged: (index) {},
-                                  children: List<Widget>.generate(10, (index) {
-                                    return Center(
-                                      child: TextButton(
-                                        onPressed: () {
-                                          Navigator.of(context).pop();
-                                        },
-                                        child: Text((++index).toString())
-                                      )
-                                    );
-                                  }),
-                                )
+                                child: CustomCupertinoPicker(firstController: firstController)
                               ),
-                              TextButton(
-                                onPressed: () {
-                                  Navigator.of(context).pop();
-                                },
-                                child: const Text('Cancel')
-                              )
+                              const CustomTextButton(text: "Cancel"),
                             ],
                           )
                         );
