@@ -21,26 +21,60 @@ class _CupertinoDesignPageState extends State<CupertinoDesignPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        child: Center(
-          child: Column(
-            children: [
-              CupertinoButton(
-                child: Text('PICKER'),
-                onPressed: () {
-                  showCupertinoModalPopup(
-                    context: context, 
-                    builder: (context) {
-                      return Container();
-                    }
-                  );
-                },
-              ),
-            ],
+    return CupertinoApp(
+      home: Scaffold(
+        body: Container(
+          child: Center(
+            child: Column(
+              // ignore: sort_child_properties_last
+              children: [
+                CupertinoButton(
+                  child: const Text('PICKER'),
+                  onPressed: () {
+                    showCupertinoModalPopup(
+                      context: context, 
+                      builder: (context) {
+                        return Container(
+                          height: 400,
+                          child: Column(
+                            children: [
+                              Expanded(
+                                child: CupertinoPicker(
+                                  itemExtent: 50,
+                                  backgroundColor: Colors.white,
+                                  scrollController: firstController,
+                                  onSelectedItemChanged: (index) {},
+                                  children: List<Widget>.generate(10, (index) {
+                                    return Center(
+                                      child: TextButton(
+                                        onPressed: () {
+                                          Navigator.of(context).pop();
+                                        },
+                                        child: Text((++index).toString())
+                                      )
+                                    );
+                                  }),
+                                )
+                              ),
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                                child: const Text('Cancel')
+                              )
+                            ],
+                          )
+                        );
+                      }
+                    );
+                  },
+                ),
+              ],
+              mainAxisAlignment: MainAxisAlignment.spaceAround,  
+            ),
           )
         )
-      )
+      ),
     );
   }
 }
