@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_application_1_1/cupertino_button/app_screens/cupertino_chat.dart';
 import 'package:flutter_application_1_1/cupertino_button/body.dart';
 import 'package:flutter_application_1_1/cupertino_button/page_scaffold.dart';
 
@@ -9,13 +10,13 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const CupertinoApp(
+    return CupertinoApp(
       theme: CupertinoThemeData(brightness: Brightness.light),
       // home: BodyPageScaffold(),
       home: Body(),
       initialRoute: "/",
       routes:  {
-
+        // '/': (context) => Body(),
       }
     );
   }
