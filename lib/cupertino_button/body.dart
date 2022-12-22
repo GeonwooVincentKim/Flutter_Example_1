@@ -1,9 +1,7 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_application_1_1/cupertino_button/app_screens/cupertino_chat.dart';
 import 'package:flutter_application_1_1/cupertino_button/model/users.dart';
 import 'package:flutter_application_1_1/cupertino_button/provider/user_provider.dart';
-import 'package:flutter_application_1_1/cupertino_button/widgets/cupertino_tabview_printvalue.dart';
-import 'package:flutter_application_1_1/cupertino_button/widgets/user_tile.dart';
+import 'package:flutter_application_1_1/cupertino_button/widgets/cupertino_scroll_view/cupertino_tabview_printvalue.dart';
 // import 'package:flutter_application_1_1/cupertino_button/widgets/cupertino_navigation_widget.dart';
 
 class Body extends StatefulWidget {
@@ -42,12 +40,12 @@ class _BodyState extends State<Body> {
         List<String> getTitleText = ['Calls', 'Chats', 'Settings'];
 
         switch (index) {
-          case 0:  return PrintValue(textLocation: getTitleText[0], userList: userList);
-          case 1:  return PrintValue(textLocation: getTitleText[1], userList: userList);
-          case 2:  return PrintValue(textLocation: getTitleText[2], userList: userList);
+          case 0:  return PrintValue(textLocation: getTitleText[0], userList: userList, index: 0);
+          case 1:  return PrintValue(textLocation: getTitleText[1], userList: userList, index: 1);
+          case 2:  return PrintValue(textLocation: getTitleText[2], userList: userList, index: 2);
         }
 
-        return PrintValue(textLocation: getTitleText[0], userList: userList);
+        return PrintValue(textLocation: getTitleText[0], userList: userList, index: 0);
       }
     );
   }

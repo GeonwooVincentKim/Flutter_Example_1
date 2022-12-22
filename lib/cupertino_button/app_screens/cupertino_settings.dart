@@ -1,10 +1,31 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_application_1_1/cupertino_button/model/users.dart';
+import 'package:flutter_application_1_1/cupertino_button/widgets/cupertino_scroll_view/cupertino_sliver_navi_bar.dart';
 
-class CupertinoSettingsPage extends StatelessWidget {
-  const CupertinoSettingsPage({super.key});
+class CupertinoSettingsPage extends StatefulWidget {
+  final dynamic textLocation;
+  final List<User> userList;
+
+  const CupertinoSettingsPage({
+    super.key,
+    required this.textLocation,
+    required this.userList
+  });
+
+  @override
+  State<CupertinoSettingsPage> createState() => _CupertinoSettingsPageState();
+}
+
+class _CupertinoSettingsPageState extends State<CupertinoSettingsPage> {
+  DateTime date = DateTime(2022, 4, 1);
+  bool chaBackup = true;
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return CustomScrollView(
+      slivers: [
+        CupertinoSliverNaviBar(textLocation: widget.textLocation),
+      ],
+    );
   }
 }
