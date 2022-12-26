@@ -12,17 +12,26 @@ class HttpApp extends StatefulWidget {
 class _HttpAppState extends State<HttpApp> {
   String result = '';
   List? data;
+  TextEditingController? _editingController;
 
   @override
   void initState() {
     super.initState();
     data = new List.empty(growable: true);
+    _editingController = new TextEditingController();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Http Example')),
+      appBar: AppBar(
+        title: TextField(
+          controller: _editingController,
+          style: const TextStyle(color: Colors.white),
+          keyboardType: TextInputType.text,
+          decoration: const InputDecoration(hintText: 'Type Search word'),
+        )
+      ),
       body: Center(
         child: data!.isEmpty
           ? const Text(
@@ -81,7 +90,7 @@ class _HttpAppState extends State<HttpApp> {
   }
 
   Future<String> getJSONData() async {
-    var url = 'https://dapi.kakao.com/v3/search/book?target=title&query=doit';
+    var url = 'https://dapi.kakao.com/v3/search/book?target=title&query=${_editingController!.value.text}';
     var response = await http.get(
       Uri.parse(url),
       headers: {
