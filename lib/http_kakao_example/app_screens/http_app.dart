@@ -62,7 +62,15 @@ class _HttpAppState extends State<HttpApp> {
                       data![index]['thumbnail'],
                       height: 100,
                       width: 100,
-                      fit: BoxFit.contain
+                      fit: BoxFit.contain,
+                      errorBuilder: (context, error, stackTrace) {
+                        return Image.asset(
+                          "image/chapter_07/book-clipart.png",
+                          height: 100,
+                          width: 100,
+                          fit: BoxFit.contain
+                        );
+                      },
                     ),
                     Column(
                       children: [
