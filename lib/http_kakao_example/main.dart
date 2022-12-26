@@ -35,39 +35,46 @@ class _HttpAppState extends State<HttpApp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Http Example')),
-      body: Container(
-        child: Center(
-          child: data!.length == 0
-            ? const Text(
-              'No Data',
-              style: TextStyle(fontSize: 20),
-              textAlign: TextAlign.center,
-            ) : 
-            ListView.builder(
-              itemBuilder: (context, index) {
-                return Card(
-                  child: Container(
-                    child: Column(
+      appBar: AppBar(title: const Text('Http Example')),
+      body: Center(
+        child: data!.isEmpty
+          ? const Text(
+            'No Data',
+            style: TextStyle(fontSize: 20),
+            textAlign: TextAlign.center,
+          ) : 
+          ListView.builder(
+            itemBuilder: (context, index) {
+              return Card(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Image.network(
+                      data![index]['thumbnail'],
+                      height: 100,
+                      width: 100,
+                      fit: BoxFit.contain
+                    ),
+                    Column(
                       children: [
-                        Text(data![index]['title'].toString()),
-                        Text(data![index]['authors'].toString()),
-                        Text(data![index]['sale_price'].toString()),
-                        Text(data![index]['status'].toString()),
-                        Image.network(
-                          data![index]['thumbnail'],
-                          height: 100,
-                          width: 100,
-                          fit: BoxFit.contain
-                        )
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width - 150,
+                          child: Text(
+                            data![index]['title'].toString(),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                        Text('Author : ${data![index]['authors'].toString()}'),
+                        Text('Price : ${data![index]['sale_price'].toString()}'),
+                        Text('Sell Status : ${data![index]['status'].toString()}'),
                       ],
                     )
-                  )
-                );
-              },
-              itemCount: data!.length,
-            )
-        )
+                  ],
+                )
+              );
+            },
+            itemCount: data!.length,
+          )
       ),
       floatingActionButton: FloatingActionButton(
         // onPressed: () async {
