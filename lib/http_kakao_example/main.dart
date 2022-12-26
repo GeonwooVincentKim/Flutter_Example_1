@@ -24,6 +24,13 @@ class HttpApp extends StatefulWidget {
 
 class _HttpAppState extends State<HttpApp> {
   String result = '';
+  List? data;
+
+  @override
+  void initState() {
+    super.initState();
+    data = new List.empty(growable: true);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +38,35 @@ class _HttpAppState extends State<HttpApp> {
       appBar: AppBar(title: Text('Http Example')),
       body: Container(
         child: Center(
-          child: Text('$result')
+          child: data!.length == 0
+            ? const Text(
+              'No Data',
+              style: TextStyle(fontSize: 20),
+              textAlign: TextAlign.center,
+            ) : 
+            ListView.builder(
+              itemBuilder: (context, index) {
+                return Card(
+                  child: Container(
+                    child: Column(
+                      children: [
+                        Text(data![index]['title'].toString()),
+                        Text(data![index]['authors'].toString()),
+                        Text(data![index]['sale_price'].toString()),
+                        Text(data![index]['status'].toString()),
+                        Image.network(
+                          data![index]['thumbnail'],
+                          height: 100,
+                          width: 100,
+                          fit: BoxFit.contain
+                        )
+                      ],
+                    )
+                  )
+                );
+              },
+              itemCount: data!.length,
+            )
         )
       ),
       floatingActionButton: FloatingActionButton(
@@ -60,7 +95,12 @@ class _HttpAppState extends State<HttpApp> {
       }
     );
 
-    print(response.body);
-    return "Successfull";
+    setState(() {
+      var dataConvertedToJSON = json.decode(response.body);
+      List result = dataConvertedToJSON['documents'];
+      data!.addAll(result);
+    });
+
+    return response.body;
   }
 }
