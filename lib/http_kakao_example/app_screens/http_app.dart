@@ -13,12 +13,25 @@ class _HttpAppState extends State<HttpApp> {
   String result = '';
   List? data;
   TextEditingController? _editingController;
+  ScrollController? _scrollController;
+  int page = 1;
 
   @override
   void initState() {
     super.initState();
     data = new List.empty(growable: true);
     _editingController = new TextEditingController();
+    _scrollController = new ScrollController();
+
+    _scrollController!.addListener(() {
+      if (_scrollController!.offset >= _scrollController!.position.maxScrollExtent
+      && !_scrollController!.position.outOfRange) {
+        print('bottom');
+        page++;
+
+        getJSONData();
+      }
+    });
   }
 
   @override
@@ -70,6 +83,7 @@ class _HttpAppState extends State<HttpApp> {
               );
             },
             itemCount: data!.length,
+            controller: _scrollController,
           )
       ),
       floatingActionButton: FloatingActionButton(
@@ -81,7 +95,9 @@ class _HttpAppState extends State<HttpApp> {
         //     result = response.body;
         //   });
         // },
-        onPressed: () async {
+        onPressed: () {
+          page = 1;
+          data!.clear();
           getJSONData();
         },
         child: const Icon(Icons.file_download)
@@ -90,7 +106,7 @@ class _HttpAppState extends State<HttpApp> {
   }
 
   Future<String> getJSONData() async {
-    var url = 'https://dapi.kakao.com/v3/search/book?target=title&query=${_editingController!.value.text}';
+    var url = 'https://dapi.kakao.com/v3/search/book?target=title&page=$page&query=${_editingController!.value.text}';
     var response = await http.get(
       Uri.parse(url),
       headers: {
