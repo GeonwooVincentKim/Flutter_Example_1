@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 void main() => runApp(MyApp());
 
@@ -34,16 +35,32 @@ class _HttpAppState extends State<HttpApp> {
         )
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () async {
-          var url = 'http://www.google.com';
-          var response = await http.get(Uri.parse(url));
+        // onPressed: () async {
+        //   var url = 'http://www.google.com';
+        //   var response = await http.get(Uri.parse(url));
           
-          setState(() {
-            result = response.body;
-          });
+        //   setState(() {
+        //     result = response.body;
+        //   });
+        // },
+        onPressed: () async {
+          getJSONData();
         },
         child: const Icon(Icons.file_download)
       ),
     );
+  }
+
+  Future<String> getJSONData() async {
+    var url = 'https://dapi.kakao.com/v3/search/book?target=title&query=doit';
+    var response = await http.get(
+      Uri.parse(url),
+      headers: {
+        "Authorization": "KakaoAK 4ef0066672e401dbdd94650e01ef9879"
+      }
+    );
+
+    print(response.body);
+    return "Successfull";
   }
 }
