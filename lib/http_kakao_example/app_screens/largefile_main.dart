@@ -23,6 +23,7 @@ class _LargeFileMainState extends State<LargeFileMain> {
   @override
   void initState() {
     super.initState();
+    // ignore: unnecessary_new
     _editingController = new TextEditingController(
       text: 'https://images.pexels.com/photos/240040/pexels-photo-240040.jpeg?auto=compress'
     );
