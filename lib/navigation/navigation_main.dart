@@ -8,7 +8,12 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: "SubPage Example",
       theme: ThemeData(primarySwatch: Colors.blue),
-      home: FirstPage(),
+      // home: FirstPage(),
+      initialRoute: "/",
+      routes: {
+        "/": (context) => FirstPage(),
+        "/second": (context) => SecondPage()
+      }
     );
   }
 }
@@ -32,7 +37,8 @@ class FirstPageState extends State<FirstPage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.of(context).push(MaterialPageRoute(builder: (context) => SecondPage()));
+          // Navigator.of(context).push(MaterialPageRoute(builder: (context) => SecondPage()));
+          Navigator.of(context).pushNamed("/second");
         },
         child: Icon(Icons.add),
       ),
