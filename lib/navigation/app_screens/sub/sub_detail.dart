@@ -24,30 +24,33 @@ class _SubDetailState extends State<SubDetail> {
       appBar: AppBar(
         title: const Text('Sub Detail Example')
       ),
-      body: Container(
-        child: Center(
-          child: ElevatedButton(
-            onPressed: () {
-              // Navigator.of(context).pushReplacementNamed('/second');
-              Navigator.of(context).pushNamed('/second');
-            },
-            child: const Text('Access to Second Page')
-          )
-        )
-      )
-      // body: ListView.builder(itemBuilder: (context, index) {
-      //   return Card(
-      //     child: InkWell(
-      //       child: Text(getTodoList[index].toString(), style: const TextStyle(fontSize: 30)),
-      //       onTap:() {
-      //         Navigator.of(context).pushNamed('/thrid', arguments: getTodoList[index].toString());
-      //       }
+      // body: Container(
+      //   child: Center(
+      //     child: ElevatedButton(
+      //       onPressed: () {
+      //         // Navigator.of(context).pushReplacementNamed('/second');
+      //         Navigator.of(context).pushNamed('/second');
+      //       },
+      //       child: const Text('Access to Second Page')
       //     )
-      //   );
-      // }, itemCount: getTodoList.length),
-      // floatingActionButton: FloatingActionButton(onPressed: () {
-      //   _addNavigation(context);
-      // }, child: const Icon(Icons.add)),
+      //   )
+      // )
+      body: ListView.builder(itemBuilder: (context, index) {
+        return Card(
+          child: InkWell(
+            child: Text(getTodoList[index].toString(), style: const TextStyle(fontSize: 30)),
+            onTap:() {
+              Navigator.of(context).pushNamed('/thrid', arguments: getTodoList[index].toString());
+            }
+          )
+        );
+      }, itemCount: getTodoList.length),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          _addNavigation(context);
+        }, 
+        child: const Icon(Icons.add)
+      ),
     );
   }
 
