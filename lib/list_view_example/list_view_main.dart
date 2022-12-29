@@ -1,8 +1,12 @@
+import 'dart:async';
+
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1_1/list_view_example/model/animalItem.dart';
 import 'package:flutter_application_1_1/list_view_example/provider/animal_provider.dart';
 import 'package:flutter_application_1_1/list_view_example/screen/first_page.dart';
 import 'package:flutter_application_1_1/list_view_example/screen/second_page.dart';
+import 'package:flutter_application_1_1/list_view_example/widgets/utils.dart';
 
 void main() => runApp(MyApp());
 
@@ -27,12 +31,15 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
+  late StreamSubscription subscription;
+
   TabController? controller;
   List<Animal> animalList = List.empty(growable: true);
 
   @override
   void initState() {
     super.initState();
+    subscription = Connectivity().onConnectivityChanged.listen(showConnectivitySnackBar);
 
     controller = TabController(length: 2, vsync: this);
     animalList = AnimalProvider().animalItems;
@@ -68,7 +75,18 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
 
   @override
   void dispose() {
+    subscription.cancel();
     controller?.dispose();
     super.dispose();
+  }
+
+  void showConnectivitySnackBar(ConnectivityResult result) {
+    final hasInternet = result != ConnectivityResult.none;
+    final message = hasInternet
+      ? 'You have again ${result.toString()}'
+      : 'You have no internet';
+    
+    final color = hasInternet ? Colors.green : Colors.red;
+    Utils.showTopSnackBar(context, message, color);
   }
 }
