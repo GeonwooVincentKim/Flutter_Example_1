@@ -13,28 +13,28 @@ class SecondDetail extends StatelessWidget {
       ),
       body: Container(
         child: Center(
-          // child: Column(
-          //   children: [
-          //     TextField(
-          //       controller: controller,
-          //       keyboardType: TextInputType.text,
-          //     ),
-          //     ElevatedButton(
-          //       onPressed: () {
-          //         Navigator.of(context).pop(controller.value.text);
-          //         // Navigator.of(context).pushReplacementNamed('/second');
-          //       },
-          //       child: const Text('Access to First Page')
-          //     )
-          //   ]
-          // ),
-          child: ElevatedButton(
-            onPressed: () {
-              // Navigator.of(context).pop(controller.value.text);
-              Navigator.of(context).pushReplacementNamed('/third');
-            },
-            child: const Text('Access to Third Page')
+          child: Column(
+            children: [
+              TextField(
+                controller: controller,
+                keyboardType: TextInputType.text,
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.of(context).pop(controller.value.text);
+                  // Navigator.of(context).pushReplacementNamed('/second');
+                },
+                child: const Text('Save')
+              )
+            ]
           )
+          // child: ElevatedButton(
+          //   onPressed: () {
+          //     // Navigator.of(context).pop(controller.value.text);
+          //     Navigator.of(context).pushReplacementNamed('/third');
+          //   },
+          //   child: const Text('Access to Third Page')
+          // )
         )
       )
     );
