@@ -39,20 +39,13 @@ class _BodyState extends State<Body> {
           List<String> getTitleText = ['Calls', 'Chats', 'Settings'];
 
           switch (index) {
-            case 0:
-              return PrintValue(
-                  textLocation: getTitleText[0], userList: userList, index: 0);
-            case 1:
-              return PrintValue(
-                  textLocation: getTitleText[1], userList: userList, index: 1);
+            case 0: return PrintValue(textLocation: getTitleText[0], userList: userList, index: 0);
+            case 1: return PrintValue(textLocation: getTitleText[1], userList: userList, index: 1);
             // case 2:  return PrintValue(textLocation: getTitleText[2], userList: userList, index: 2);
-            case 2:
-              return CupertinoSettingsPage(
-                  textLocation: Text(getTitleText[2].toString()));
+            case 2: return CupertinoSettingsPage(textLocation: Text(getTitleText[2].toString()));
           }
 
-          return PrintValue(
-              textLocation: getTitleText[0], userList: userList, index: 0);
+          return PrintValue(textLocation: getTitleText[0], userList: userList, index: 0);
         });
   }
 
