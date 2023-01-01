@@ -28,12 +28,9 @@ class _BodyState extends State<Body> {
         tabBar: CupertinoTabBar(
             currentIndex: 1,
             items: const <BottomNavigationBarItem>[
-              BottomNavigationBarItem(
-                  icon: Icon(CupertinoIcons.phone), label: 'Calls'),
-              BottomNavigationBarItem(
-                  icon: Icon(CupertinoIcons.chat_bubble_2), label: 'Chats'),
-              BottomNavigationBarItem(
-                  icon: Icon(CupertinoIcons.settings), label: 'Settings'),
+              BottomNavigationBarItem(icon: Icon(CupertinoIcons.phone), label: 'Calls'),
+              BottomNavigationBarItem(icon: Icon(CupertinoIcons.chat_bubble_2), label: 'Chats'),
+              BottomNavigationBarItem(icon: Icon(CupertinoIcons.settings), label: 'Settings'),
             ]),
         tabBuilder: (context, index) {
           List<String> getTitleText = ['Calls', 'Chats', 'Settings'];
