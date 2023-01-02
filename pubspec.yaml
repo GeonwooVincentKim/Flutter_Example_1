@@ -79,6 +79,7 @@ flutter:
         - image/chapter_06/wolf.png
         - image/chapter_07/no-image-avaliable.png
         - image/chapter_07/book-clipart.png
+        - repo/fruit.txt
     #   - images/a_dot_burr.jpeg
     #   - images/a_dot_ham.jpeg
 
