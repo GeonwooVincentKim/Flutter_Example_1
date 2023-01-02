@@ -20,7 +20,7 @@ class _FileAppState extends State<FileApp> {
   @override
   void initState() {
     super.initState();
-    readCountFile();
+    initData();
   }
 
   void initData() async {
@@ -50,6 +50,13 @@ class _FileAppState extends State<FileApp> {
     File("${dir.path}/count.txt").writeAsStringSync(count.toString());
   }
 
+  void writeFruit(String fruit) async {
+    var dir = await getApplicationDocumentsDirectory();
+    var file = await File('${dir.path}/fruit.txt').readAsString();
+    file = '$file\n$fruit';
+    File("${dir.path}/fruit.txt").writeAsStringSync(file);
+  }
+
   Future<List<String>> readListFile() async {
     // ignore: unnecessary_new
     List<String> itemList = new List.empty(growable: true);
@@ -76,7 +83,7 @@ class _FileAppState extends State<FileApp> {
 
       return itemList;
     } else {
-      var file = await File(dir.path + '/fruit.txt').readAsString();
+      var file = await File('${dir.path}/fruit.txt').readAsString();
       var array = file.split("\n");
 
       for (var item in array) {
@@ -94,18 +101,41 @@ class _FileAppState extends State<FileApp> {
       appBar: AppBar(title: const Text('File Example')),
       body: Container(
         child: Center(
-          child: Text(
-            '$_count',
-            style: const TextStyle(fontSize: 40),
+          // child: Text(
+          //   '$_count',
+          //   style: const TextStyle(fontSize: 40),
+          // )
+          child: Column(
+            children: [
+              TextField(
+                controller: controller,
+                keyboardType: TextInputType.text,
+              ),
+              ListView.builder(
+                itemBuilder: (context, index) {
+                  return Card(
+                    child: Center(
+                      child: Text(
+                        itemList[index],
+                        style: const TextStyle(fontSize: 30)
+                      )
+                    )
+                  );
+                },
+                itemCount: itemList.length
+              )
+            ]
           )
         )
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
+          writeFruit(controller.value.text);
           setState(() {
-            _count++;
+            // _count++;
+            itemList.add(controller.value.text);
           });
-          writeCountFile(_count);
+          // writeCountFile(_count);
         },
         child: const Icon(Icons.add),
       ),
