@@ -111,18 +111,20 @@ class _FileAppState extends State<FileApp> {
                 controller: controller,
                 keyboardType: TextInputType.text,
               ),
-              ListView.builder(
-                itemBuilder: (context, index) {
-                  return Card(
-                    child: Center(
-                      child: Text(
-                        itemList[index],
-                        style: const TextStyle(fontSize: 30)
+              Expanded(
+                child: ListView.builder(
+                  itemBuilder: (context, index) {
+                    return Card(
+                      child: Center(
+                        child: Text(
+                          itemList[index],
+                          style: const TextStyle(fontSize: 30)
+                        )
                       )
-                    )
-                  );
-                },
-                itemCount: itemList.length
+                    );
+                  },
+                  itemCount: itemList.length
+                )
               )
             ]
           )
