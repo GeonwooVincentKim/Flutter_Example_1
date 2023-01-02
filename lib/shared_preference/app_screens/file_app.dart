@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:path_provider/path_provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class FileApp extends StatefulWidget {
   const FileApp({super.key});
@@ -34,6 +35,42 @@ class _FileAppState extends State<FileApp> {
 
   void writeCountFile(int count) async {
 
+  }
+
+  Future<List<String>> readListFile() async {
+    List<String> itemList = new List.empty(growable: true);
+    var key = 'first';
+
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    bool? firstCheck = pref.getBool(key);
+
+    var dir = await getApplicationDocumentsDirectory();
+    bool fileExist = await File(dir.path + '/fruit.txt').exists();
+
+    if (firstCheck == null || firstCheck == false || fileExist == false) {
+      pref.setBool(key, true);
+
+      var file = await DefaultAssetBundle.of(context).loadString('repo/fruit.txt');
+      File(dir.path + '/fruit.txt').writeAsStringSync(file);
+
+      var array = file.split("\n");
+      for (var item in array) {
+        print(item);
+        itemList.add(item);
+      }
+
+      return itemList;
+    } else {
+      var file = await File(dir.path + '/fruit.txt').readAsString();
+      var array = file.split("\n");
+
+      for (var item in array) {
+        print(item);
+        itemList.add(item);
+      }
+
+      return itemList;
+    }
   }
 
   @override
