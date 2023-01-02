@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1_1/http_kakao_example/app_screens/largefile_main.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 
@@ -49,24 +50,41 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    // return Scaffold(
+    //   appBar: AppBar(
+    //     title: Text(widget.title),
+    //   ),
+    //   body: Center(
+    //     child: Column(
+    //       mainAxisAlignment: MainAxisAlignment.center,
+    //       children: [
+    //         const Text('You have pushed this button many times: '),
+    //         Text('$_counter', style: Theme.of(context).textTheme.displayLarge)
+    //       ],
+    //     )
+    //   ),
+    //   floatingActionButton: FloatingActionButton(
+    //     onPressed: _incrementCounter,
+    //     tooltip: 'Increment',
+    //     child: const Icon(Icons.add)
+    //   ),
+    // );
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: const Text('Change Logo'),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).push(MaterialPageRoute(builder: (context) => LargeFileMain()));
+            },
+            child: const Text(
+              'Change Logo',
+              style: TextStyle(color: Colors.white)
+            )
+          )
+        ],
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Text('You have pushed this button many times: '),
-            Text('$_counter', style: Theme.of(context).textTheme.displayLarge)
-          ],
-        )
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add)
-      ),
+      body: Container()
     );
   }
 }
