@@ -12,6 +12,10 @@ class FileApp extends StatefulWidget {
 
 class _FileAppState extends State<FileApp> {
   int _count = 0;
+  // ignore: unnecessary_new
+  List<String> itemList = new List.empty(growable: true);
+  // ignore: unnecessary_new
+  TextEditingController controller = new TextEditingController();
 
   @override
   void initState() {
@@ -19,10 +23,18 @@ class _FileAppState extends State<FileApp> {
     readCountFile();
   }
 
+  void initData() async {
+    var result = await readListFile();
+
+    setState(() {
+      itemList.addAll(result);
+    });
+  }
+
   void readCountFile() async {
     try {
       var dir = await getApplicationDocumentsDirectory();
-      var file = await File(dir.path + '/count.txt').readAsString();
+      var file = await File('${dir.path}/count.txt').readAsString();
       print(file);
 
       setState(() {
@@ -34,10 +46,12 @@ class _FileAppState extends State<FileApp> {
   }
 
   void writeCountFile(int count) async {
-
+    var dir = await getApplicationDocumentsDirectory();
+    File("${dir.path}/count.txt").writeAsStringSync(count.toString());
   }
 
   Future<List<String>> readListFile() async {
+    // ignore: unnecessary_new
     List<String> itemList = new List.empty(growable: true);
     var key = 'first';
 
@@ -45,13 +59,14 @@ class _FileAppState extends State<FileApp> {
     bool? firstCheck = pref.getBool(key);
 
     var dir = await getApplicationDocumentsDirectory();
-    bool fileExist = await File(dir.path + '/fruit.txt').exists();
+    bool fileExist = await File('${dir.path}/fruit.txt').exists();
 
     if (firstCheck == null || firstCheck == false || fileExist == false) {
       pref.setBool(key, true);
 
+      // ignore: use_build_context_synchronously
       var file = await DefaultAssetBundle.of(context).loadString('repo/fruit.txt');
-      File(dir.path + '/fruit.txt').writeAsStringSync(file);
+      File('${dir.path}/fruit.txt').writeAsStringSync(file);
 
       var array = file.split("\n");
       for (var item in array) {
