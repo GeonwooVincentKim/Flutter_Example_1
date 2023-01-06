@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:sqflite_common/sqlite_api.dart';
 
 class DatabaseApp extends StatefulWidget {
-  const DatabaseApp({super.key});
+  final Future<Database> db;
+  const DatabaseApp({required this.db, super.key});
 
   @override
   State<DatabaseApp> createState() => _DatabaseAppState();
