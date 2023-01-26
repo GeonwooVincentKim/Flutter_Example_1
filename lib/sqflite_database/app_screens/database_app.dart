@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1_1/sqflite_database/model/todo.dart';
+import 'package:flutter_application_1_1/sqflite_database/widgets/navigator_pop_text_button.dart';
 import 'package:sqflite_common/sqlite_api.dart';
 
 class DatabaseApp extends StatefulWidget {
@@ -46,6 +47,39 @@ class _DatabaseAppState extends State<DatabaseApp> {
     });
   }
 
+  void _allUpdate() async {
+    final Database database = await widget.db;
+    await database.rawUpdate('update todos set active = 1 where active = 0');
+
+    setState(() {
+      todoList = getTodos();
+    });
+  }
+
+  void _updateTodo(Todo todo) async {
+    final Database database = await widget.db;
+    
+    await database.update(
+      'todos',
+      todo.toMap(),
+      where: 'id = ? ',
+      whereArgs: [todo.id]
+    );
+
+    setState(() {
+      todoList = getTodos();
+    });
+  }
+
+  void _deleteTodo(Todo todo) async {
+    final Database database = await widget.db;
+    await database.delete('todos', where: 'id=?', whereArgs: [todo.id]);
+
+    setState(() {
+      todoList = getTodos();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -79,12 +113,64 @@ class _DatabaseAppState extends State<DatabaseApp> {
                               )
                             ],
                           ),
+                          onTap: () async {
+                            TextEditingController controller = new TextEditingController(text: todo.content);
+
+                            Todo result = await showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  title: Text('${todo.id} : ${todo.title}'),
+                                  content: TextField(
+                                    controller: controller,
+                                    keyboardType: TextInputType.text
+                                  ),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () {
+                                        setState(() {
+                                          todo.active == 1
+                                            ? todo.active == 0
+                                            : todo.active == 1;
+                                          todo.content = controller.value.text;
+                                        });
+                                        Navigator.of(context).pop(todo);
+                                      },
+                                      child: const Text('Yes'),
+                                    ),
+                                    TextButton(
+                                      onPressed: () {
+                                        Navigator.of(context).pop(todo);
+                                      },
+                                      child: const Text('No'),
+                                    ),
+                                  ],
+                                );
+                              }
+                            );
+                            _updateTodo(result);
+                          },
+                          onLongPress: () async {
+                            Todo result = await showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  title: Text('${todo.id} : ${todo.title}'),
+                                  content: Text('Do you want to delete ${todo.content}?'),
+                                  actions: [
+                                    NavigatorPopTextButton(todo: todo, innerText: 'Yes'),
+                                    NavigatorPopTextButton(todo: todo, innerText: 'No')
+                                  ],
+                                );
+                              }
+                            );
+                            _deleteTodo(result);
+                          },
                         );
                       },
                       itemCount: (snapshot.data as List<Todo>).length,
                     );
-                  }
-                else {
+                  } else {
                   return const Text('No Data');
                 }
               }
@@ -94,17 +180,35 @@ class _DatabaseAppState extends State<DatabaseApp> {
           )
         )
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () async {
-          final todo = await Navigator.of(context).pushNamed('/add');
+      floatingActionButton: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          FloatingActionButton(
+            onPressed: () async {
+              final todo = await Navigator.of(context).pushNamed('/add');
 
-          if (todo != null) {
-            _insertTodo(todo as Todo);
-          }
-        },
-        child: const Icon(Icons.add),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+              if (todo != null) {
+                _insertTodo(todo as Todo);
+              }
+            },
+            heroTag: null,
+            child: const Icon(Icons.add),
+          ),
+          SizedBox(
+            height: 10
+          ),
+          FloatingActionButton(
+            onPressed: () async {
+              _allUpdate();
+            },
+            heroTag: null,
+            child: Icon(Icons.update),
+          )
+        ],
+      ) 
+        
+
+      // floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }
