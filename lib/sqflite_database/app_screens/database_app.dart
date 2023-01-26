@@ -83,7 +83,21 @@ class _DatabaseAppState extends State<DatabaseApp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Database Example')),
+      appBar: AppBar(
+        title: const Text('Database Example'),
+        actions: [
+          ElevatedButton(
+            onPressed: () async {
+              await Navigator.of(context).pushNamed('/clear');
+              
+              setState(() {
+                todoList = getTodos();
+              });
+            },
+            child: const Text('Completed Task', style: TextStyle(color: Colors.white)),
+          )
+        ],
+      ),
       body: Container(
         child: Center(
           child: FutureBuilder(
