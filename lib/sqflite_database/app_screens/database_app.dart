@@ -55,9 +55,9 @@ class _DatabaseAppState extends State<DatabaseApp> {
           child: FutureBuilder(
             builder: (context, snapshot) {
               switch (snapshot.connectionState) {
-                case ConnectionState.none:  return CircularProgressIndicator();
-                case ConnectionState.waiting:   return CircularProgressIndicator();
-                case ConnectionState.active:  return CircularProgressIndicator();
+                case ConnectionState.none: return CircularProgressIndicator();
+                case ConnectionState.waiting: return CircularProgressIndicator();
+                case ConnectionState.active: return CircularProgressIndicator();
                 case ConnectionState.done:
                   if (snapshot.hasData) {
                     return ListView.builder(
